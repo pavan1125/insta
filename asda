@@ -1,4 +1,4 @@
-User
+huUser
 {
 
     "BasicPrice":300, "MovieName":"Dhamaka",
@@ -20,3 +20,36 @@ User
             ]
 
   }
+import React from 'react';
+
+const MovieTable = ({ rows }) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Row</th>
+          <th>Seats</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr key={row.row}>
+            <td>{row.row}</td>
+            <td>
+              {Array.from({ length: row.End - row.Start + 1 }, (_, i) => i + row.Start).map((seat) => (
+                <button
+                  key={seat}
+                  disabled={row.AlreadyBooked.includes(seat)}
+                >
+                  {seat}
+                </button>
+              ))}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
+
+export default MovieTable;
